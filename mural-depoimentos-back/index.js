@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const http = require('http').createServer(app);
+const { createTestimony, getAllTestimonies } = require('./models/testimonies')
 
 
 const PORT = 3001;
@@ -23,12 +24,13 @@ require('./sockets/testimonies')(io);
 //   res.status(200).json(testimonies);
 // });
 
-// app.post('/', async (req, res) => {
-//   const { user, text } = req.body;
+app.post('/creat', async (req, res) => {
+  const { user, text } = req.body;
 
-//   const testimonies = await testimonyModel.createTestimony(user, text);
+  const testimonies = await createTestimony(user, text);
+  const alltestimonies = await getAllTestimonies();
 
-//   res.status(200).json(testimonies);
-// });
+  res.status(200).json(alltestimonies);
+});
 
 http.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
