@@ -12,6 +12,12 @@ const io = require('socket.io')(http, {
   }
 });
 
+require('./sockets/depoimento')(io);
+
+app.get('/testimonial', (req, res) => {
+  res.status(200).send('Ok')
+})
+
 http.listen(PORT, () => {
   console.log(`Server on ${URL}`);
 });
