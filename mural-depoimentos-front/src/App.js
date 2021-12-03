@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Depoimento from './components/Depoimento';
+import FormDepoiment from './components/FormDepoiment';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       </header>
       <main>
         <Depoimento img={ logo } text='sdsd' userName='Marlon' />
+        <FormDepoiment />
       </main>
     </div>
   );
