@@ -3,9 +3,6 @@ const app = express();
 const cors = require('cors');
 const http = require('http').createServer(app);
 
-const testimonyModel = require('./models/testimonies');
-
-const testimonies = [];
 
 const PORT = 3001;
 
@@ -19,17 +16,19 @@ const io = require('socket.io')(http, {
 app.use(express.json());
 app.use(cors());
 
-app.get('/', async (_req, res) => {
-  const testimonies = await testimonyModel.getAllTestimonies();
-  res.status(200).json(testimonies);
-});
+require('./sockets/testimonies')(io);
 
-app.post('/', async (req, res) => {
-  const { user, text } = req.body;
+// app.get('/', async (_req, res) => {
+//   const testimonies = await testimonyModel.getAllTestimonies();
+//   res.status(200).json(testimonies);
+// });
 
-  const testimonies = await testimonyModel.createTestimony(user, text);
+// app.post('/', async (req, res) => {
+//   const { user, text } = req.body;
 
-  res.status(200).json(testimonies);
-});
+//   const testimonies = await testimonyModel.createTestimony(user, text);
+
+//   res.status(200).json(testimonies);
+// });
 
 http.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
