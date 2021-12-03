@@ -1,23 +1,35 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const http = require('http').createServer(app);
 
-const PORT = 3010;
-const URL = `http://localhost:${PORT}/`;
+const testimonyModel = require('./models/testimonies');
+
+const testimonies = [];
+
+const PORT = 3001;
 
 const io = require('socket.io')(http, {
   cors: {
-    origin: URL,
-    methods: ['GET', 'POST'],
-  }
+    origin: 'http://localhost:3000',
+    methods: ['POST', 'GET'],
+  },
 });
 
-require('./sockets/depoimento')(io);
+app.use(express.json());
+app.use(cors());
 
-app.get('/testimonial', (req, res) => {
-  res.status(200).send('Ok')
-})
-
-http.listen(PORT, () => {
-  console.log(`Server on ${URL}`);
+app.get('/', async (_req, res) => {
+  const testimonies = await testimonyModel.getAllTestimonies();
+  res.status(200).json(testimonies);
 });
+
+app.post('/', async (req, res) => {
+  const { user, text } = req.body;
+
+  const testimonies = await testimonyModel.createTestimony(user, text);
+
+  res.status(200).json(testimonies);
+});
+
+http.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
