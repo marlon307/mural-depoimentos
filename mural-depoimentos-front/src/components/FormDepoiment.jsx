@@ -1,9 +1,23 @@
-import React from 'react';
-import { io } from 'socket.io-client';
+import React, { useState } from 'react';
+import socket from '../socket'
 
-function FormDepoiment({ img, userName, text }) {
-  function hadleClick(event) {
+function FormDepoiment() {
+  const [valueInputs, setValuesInputs] = useState({
+    userName: '',
+    testimonial: '',
+  });
+
+  function handleChange({ target }) {
+    const { name, value } = target;
+    setValuesInputs({
+      ...valueInputs,
+      [name]: value,
+    })
+  }
+
+  function handleClick(event) {
     event.preventDefault();
+    socket.emit('sendDepoiment', valueInputs)
   }
 
   return (
@@ -11,13 +25,23 @@ function FormDepoiment({ img, userName, text }) {
       <fieldset>
         <label htmlFor="user-name">
           <span>Usuário:</span>
-          <input id="user-name" type="text" name="user-name" />
+          <input
+            id="user-name"
+            onChange={ handleChange }
+            type="text"
+            name="userName"
+          />
         </label>
         <label htmlFor="depoiment">
           <span>Depoimento:</span>
-          <input id="depoiment" type="text" name="depoiment" />
+          <input
+            id="depoiment"
+            type="text"
+            name="testimonial"
+            onChange={ handleChange }
+          />
         </label>
-        <button onClick={ hadleClick }>Enviar</button>
+        <button onClick={ handleClick }>Enviar</button>
       </fieldset>
     </form>
   )
