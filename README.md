@@ -17,3 +17,15 @@ Crie uma aplicação usando Socket.io que simule um mural de depoimentos para um
 
 - Os depoimentos devem ser persistidos em um banco de dados;
 - Listar todos os depoimentos já cadastrados ao carregar a páginas.
+
+Para iniciar as dua aplicçoes basta ter o MongoDb instalado em seu computador e entrar 
+nas pastas 
+
+<br/>
+
+'mural-depoimentos-back': <code>comando npm dev</code>
+
+<br/>
+
+'mural-depoimentos-front': <code>comando npm start</code>
+
