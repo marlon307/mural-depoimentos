@@ -12,9 +12,8 @@ function App() {
 
   // Load all Depoiment after render page
   useEffect(() => {
-    socket.emit("loadAllDepoiment");
-    socket.on('returnloadAllDepoiment', (item) => {
-      console.log(item);
+    socket.emit("loadAllDepoiment");// Faz uma chamada no servidor
+    socket.on('returnloadAllDepoiment', (item) => {//Aqui temos a resposta com o array
       if (item[0].user) {
         setTestimonial(item);
       }
@@ -23,8 +22,7 @@ function App() {
 
   // update Array after click send 
   useEffect(() => {
-    socket.on('resTestimony', (item) => {
-      console.log(item);
+    socket.on('resTestimony', (item) => { //Quando houver um clique no botão de enviar sera atualizado o array, inserindo um objeto com as novas informações
       if (item.user) {
         setTestimonial([
           ...testimonial,
