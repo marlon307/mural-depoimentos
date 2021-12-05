@@ -9,6 +9,19 @@ function App() {
 
   const [testimonial, setTestimonial] = useState([]);
 
+
+  // Load all Depoiment after render page
+  useEffect(() => {
+    socket.emit("loadAllDepoiment");
+    socket.on('returnloadAllDepoiment', (item) => {
+      console.log(item);
+      if (item[0].user) {
+        setTestimonial(item);
+      }
+    })
+  }, [])
+
+  // update Array after click send 
   useEffect(() => {
     socket.on('resTestimony', (item) => {
       console.log(item);
@@ -19,7 +32,7 @@ function App() {
         ]);
       }
     })
-  }, [testimonial])
+  }, [testimonial]);
 
   return (
     <div className="App">
