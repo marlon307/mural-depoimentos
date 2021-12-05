@@ -1,5 +1,5 @@
 const { getAllTestimonies } = require('../models/testimonies')
-//Responsavel por carregar todas as infomações
+//Responsável por carregar todas as informações
 module.exports = (io) => {
   io.on('connection', (socket) => {
     socket.on('loadAllDepoiment', async () => {
