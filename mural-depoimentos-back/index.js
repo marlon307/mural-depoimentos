@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(cors());
 
 require('./sockets/testimonies')(io);
+require('./sockets/loadAllTestimonies')(io);
 
 // app.get('/', async (_req, res) => {
 //   const testimonies = await testimonyModel.getAllTestimonies();

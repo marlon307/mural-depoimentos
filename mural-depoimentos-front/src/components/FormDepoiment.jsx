@@ -17,7 +17,7 @@ function FormDepoiment() {
 
   function handleClick(event) {
     event.preventDefault();
-    socket.emit('sendDepoiment', valueInputs)
+    socket.emit('sendDepoiment', valueInputs);
   }
 
   return (

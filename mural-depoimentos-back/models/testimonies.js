@@ -9,7 +9,7 @@ const dbConnection = async () => {
 const createTestimony = async (user, text) => {
   const db = await dbConnection();
   const newTestimony = await db.insertOne({ user, text });
-  return newTestimony;
+  if (newTestimony.acknowledged) return { user, text };
 };
 
 const getAllTestimonies = async () => {

@@ -11,11 +11,15 @@ function App() {
 
   useEffect(() => {
     socket.on('resTestimony', (item) => {
-      if (item[0].user) {
-        setTestimonial(item);
+      console.log(item);
+      if (item.user) {
+        setTestimonial([
+          ...testimonial,
+          item
+        ]);
       }
     })
-  }, [])
+  }, [testimonial])
 
   return (
     <div className="App">
